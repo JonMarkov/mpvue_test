@@ -1,5 +1,5 @@
 // 请求的封装
-const host = 'https://api.it120.cc/wds'
+const host = 'https://svideo-api.kankan.com'
 export {
   host
 }
@@ -10,7 +10,7 @@ function request (url, method, data, header = {}) {
   })
   return new Promise((resolve, reject) => {
     wx.request({
-      url: host + url, // 仅为示例，并非真实的接口地址
+      url: host + url,
       method: method,
       data: data,
       header: {

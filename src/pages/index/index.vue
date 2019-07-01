@@ -28,9 +28,7 @@
         let params = {}
         const newparams = Object.assign(params)
         // 开始执行封装的请求
-        const data = await get('/shop/goods/category/all', newparams)
-        // 把返回的数据渲染到数据data中
-        this.Get_category = data.data
+        const data = await get('/microvision/getSetListByProductId', newparams)
         // 打印出返回的数据
         console.log(data)
       },
@@ -40,9 +38,7 @@
         let params = {}
         const newparams = Object.assign(params)
         // 开始执行封装的请求
-        const data = await post('/cms/news/list', newparams)
-        // 把返回的数据渲染到数据data中
-        this.Post_category = data.data
+        const data = await post('/microvision/doLike', newparams)
         // 打印出返回的数据
         console.log(data)
       }

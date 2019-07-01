@@ -20,12 +20,13 @@
         wx.getSetting({
           success: function (res) {
             console.log(res)
-            // 当前时间戳
-            let timestamp = Date.parse(new Date()) / 1000
             // 查看是否授权过
             let grant = res.authSetting['scope.userInfo']
-            console.log(timestamp)
-            console.log(grant)
+            if (grant) {
+              // 如果已经授权过，则直接跳转到首页
+              let url = '../index/main'
+              wx.navigateTo({url})
+            }
           }
         })
       },
@@ -40,7 +41,6 @@
         const _this = this
         wx.login({
           success (res) {
-            console.log(res.code)
             // 获取code
             if (res.code) {
               _this.code = res.code
@@ -57,7 +57,6 @@
         wx.getUserInfo({
           withCredentials: true,
           success (res) {
-            console.log(res)
             var params = {
               terminal: 'MINIPROVJ',
               code: code,
@@ -75,6 +74,13 @@
               },
               success: res => {
                 console.log(res)
+                if (res.data.data) {
+                  // 授权成功之后，跳转到首页
+                  let url = '../index/main'
+                  wx.navigateTo({url})
+                } else {
+                  console.log('授权失败')
+                }
               }
             })
           }
@@ -82,8 +88,13 @@
       },
       // 函数定义 判断授权弹窗是否点击了允许
       bindGetUserInfo (e) {
+        const _this = this
         // 此处判断是否点击了允许
-        console.log(e)
+        if (e.mp.detail.userInfo) {
+          _this.getUserInfoClick()
+        } else {
+          console.log('点击了拒绝')
+        }
       }
     }
   }
