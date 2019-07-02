@@ -3,6 +3,7 @@ const host = 'https://svideo-api.kankan.com'
 export {
   host
 }
+
 // 请求封装
 function request (url, method, data, header = {}) {
   wx.showLoading({
@@ -13,9 +14,7 @@ function request (url, method, data, header = {}) {
       url: host + url,
       method: method,
       data: data,
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
+      header: header,
       success: function (res) {
         wx.hideLoading()
         resolve(res.data)
@@ -30,9 +29,11 @@ function request (url, method, data, header = {}) {
     })
   })
 }
-export function get (url, data) {
-  return request(url, 'GET', data)
+
+export function get (url, data, header = {}) {
+  return request(url, 'GET', data, header)
 }
-export function post (url, data) {
-  return request(url, 'POST', data)
+
+export function post (url, data, header = {}) {
+  return request(url, 'POST', data, header)
 }

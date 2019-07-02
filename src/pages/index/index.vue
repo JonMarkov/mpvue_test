@@ -24,21 +24,27 @@
     methods: {
       // 函数定义 请求接口--GET
       async getCategory () {
+        let header = {
+          'content-type': 'application/json' // 默认值
+        }
         // 封装参数集合
         let params = {}
         const newparams = Object.assign(params)
         // 开始执行封装的请求
-        const data = await get('/microvision/getSetListByProductId', newparams)
+        const data = await get('/microvision/getSetListByProductId', newparams, header)
         // 打印出返回的数据
         console.log(data)
       },
       // 函数定义 请求接口--POST
       async postCategory () {
+        let header = {
+          'content-type': 'application/json' // 默认值
+        }
         // 封装参数集合
         let params = {}
         const newparams = Object.assign(params)
         // 开始执行封装的请求
-        const data = await post('/microvision/doLike', newparams)
+        const data = await post('/microvision/doLike', newparams, header)
         // 打印出返回的数据
         console.log(data)
       }
