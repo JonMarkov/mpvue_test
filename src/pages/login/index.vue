@@ -33,18 +33,31 @@
 
       // 函数定义 如果已经授权的情况
       AlreadyGrant: function () {
-        // 判断查看是否授权
-        wx.getSetting({
-          success: function (res) {
-            // 查看是否授权过
-            let grant = res.authSetting['scope.userInfo']
-            if (grant) {
-              // 如果已经授权过，则直接跳转到首页
-              let url = '../index/main'
-              wx.navigateTo({url})
+        // 获取当前时间戳
+        let timeStamp = Date.parse(new Date())
+        // 获取缓存的token
+        let token = local.get('token')
+        // 上次请求的时间戳
+        let lastTimeStamp = token.startTime
+        // 票据有效天数
+        let tikesDays = token.days
+        // 上次请求时间和当前时间的时间间隔
+        let interval = (timeStamp - lastTimeStamp) / 86400000
+        // 如果票据未过期则执行查看是否授权
+        if (interval <= tikesDays) {
+          // 判断查看是否授权
+          wx.getSetting({
+            success: function (res) {
+              // 查看是否授权过
+              let grant = res.authSetting['scope.userInfo']
+              if (grant) {
+                // 如果已经授权过，则直接跳转到首页
+                let url = '../index/main'
+                wx.navigateTo({url})
+              }
             }
-          }
-        })
+          })
+        }
       },
       // 函数定义 点击开始授权
       getUserInfoClick () {

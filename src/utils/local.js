@@ -18,12 +18,8 @@ local.set = function (key, value) {
  * @param {*} key
  */
 local.get = function (key) {
-  wx.getStorage({
-    key: key,
-    success: function (res) {
-      return res.data
-    }
-  })
+  let resData = wx.getStorageSync(key)
+  return resData
 }
 
 /**
