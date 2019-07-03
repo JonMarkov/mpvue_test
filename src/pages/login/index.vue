@@ -30,7 +30,6 @@
       this.AlreadyGrant()
     },
     methods: {
-
       // 函数定义 如果已经授权的情况
       AlreadyGrant: function () {
         // 获取当前时间戳
@@ -102,9 +101,7 @@
                 'content-type': 'application/json' // 默认值
               },
               success: res => {
-                console.log(res)
                 if (res.data.data) {
-                  console.log(res)
                   // 获取到返回的token信息
                   let token = res.data.token
                   // 把token信息存入本地缓存
