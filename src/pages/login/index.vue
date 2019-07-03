@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import local from '@/utils/local'
+
   export default {
     data () {
       return {
@@ -28,12 +30,12 @@
       this.AlreadyGrant()
     },
     methods: {
+
       // 函数定义 如果已经授权的情况
       AlreadyGrant: function () {
         // 判断查看是否授权
         wx.getSetting({
           success: function (res) {
-            console.log(res)
             // 查看是否授权过
             let grant = res.authSetting['scope.userInfo']
             if (grant) {
@@ -89,6 +91,11 @@
               success: res => {
                 console.log(res)
                 if (res.data.data) {
+                  console.log(res)
+                  // 获取到返回的token信息
+                  let token = res.data.token
+                  // 把token信息存入本地缓存
+                  local.set('token', token)
                   // 授权成功之后，跳转到首页
                   let url = '../index/main'
                   wx.navigateTo({url})

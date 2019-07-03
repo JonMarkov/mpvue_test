@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div v-for="(item, index) in Get_category" :key="index">{{index+1}} {{item.name}}</div>
-    <div v-for="(item, index) in Post_category" :key="index">{{index+1}} {{item.name}}</div>
+
   </div>
 </template>
 
@@ -11,31 +10,33 @@
   export default {
     data () {
       return {
-        Get_category: {},
-        Post_category: {}
       }
     },
     mounted () {
-      // 函数执行 请求接口--GET
-      this.getCategory()
-      // 函数执行 请求接口--POST
+      // 函数执行 请求接口--微剧列表（GET）
+      this.getCategory(1, 0, 40)
+      // 函数执行 请求接口--POST（测试）
       this.postCategory()
     },
     methods: {
       // 函数定义 请求接口--GET
-      async getCategory () {
+      async getCategory (sortType, startId, pageSize) {
         let header = {
           'content-type': 'application/json' // 默认值
         }
         // 封装参数集合
-        let params = {}
+        let params = {
+          sortType: sortType,
+          startId: startId,
+          pageSize: pageSize
+        }
         const newparams = Object.assign(params)
         // 开始执行封装的请求
-        const data = await get('/microvision/getSetListByProductId', newparams, header)
+        const data = await get('/microvision/getMicrovisionListForSquare', newparams, header)
         // 打印出返回的数据
         console.log(data)
       },
-      // 函数定义 请求接口--POST
+      // 函数定义 请求接口--POST(测试)
       async postCategory () {
         let header = {
           'content-type': 'application/json' // 默认值
