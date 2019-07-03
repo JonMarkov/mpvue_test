@@ -1,13 +1,27 @@
 <template>
   <div>
-    <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" @click="getUserInfoClick">获取权限</button>
+    <div v-if="canIUse">
+      <div class='header'>
+        <img src="../../../static/images/logo@3x.png"/>
+      </div>
+      <div class='content'>
+        <div class='title_sq'>申请获取以下权限</div>
+        <p>获得你的公开信息(昵称，头像等)</p></div>
+      <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" @click="getUserInfoClick" class="bottom">获取权限
+      </button>
+    </div>
+    <div v-else>请升级微信版本</div>
+
   </div>
 </template>
 
 <script>
   export default {
     data () {
-      return {}
+      return {
+        // 判断小程序的API，回调，参数，组件等是否在当前版本可用。
+        canIUse: wx.canIUse('button.open-type.getUserInfo')
+      }
     },
     mounted () {
       // 函数执行 判断是否已经授权
@@ -101,5 +115,44 @@
 </script>
 
 <style scoped>
+  .header {
+    margin: 45px 0 45px 25px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    width: 325px;
+    height: 150px;
+    line-height: 225px;
+  }
 
+  .header image {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px
+  }
+
+  .content {
+    margin-left: 25px;
+    margin-bottom: 45px;
+  }
+
+  .content text {
+    display: block;
+    color: #9d9d9d;
+    margin-top: 0px;
+    font-size: 13px
+  }
+
+  .bottom {
+    background: #4AC268;
+    border-radius: 10px;
+    margin: 35px 25px;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px;
+    color: #ffffff;
+  }
+
+  .title_sq {
+    font-size: 20px
+  }
 </style>
