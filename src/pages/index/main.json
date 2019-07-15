@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "首页"
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#121212",
+  "navigationBarTitleText": "微剧广场",
+  "navigationBarTextStyle": "white"
 }
