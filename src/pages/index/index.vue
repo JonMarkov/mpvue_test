@@ -159,8 +159,9 @@
       },
       // 函数定义 跳转到播放页
       jumpPlay (e) {
-        console.log(e)
-        console.log(e.currentTarget.dataset.microid)
+        let microid = e.currentTarget.dataset.microid
+        const url = '../player/main?microid=' + microid
+        wx.navigateTo({url})
       }
     }
   }

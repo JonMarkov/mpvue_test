@@ -6,11 +6,19 @@
 
 <script>
   import {post} from '@/utils/http.js'
+
   export default {
     data () {
-      return {}
+      return {
+        microid: ''
+      }
+    },
+    created () {
+
     },
     mounted () {
+      // 获取到携带的参数
+      this.microid = this.$root.$mp.query.microid
       // 函数执行 请求接口--POST（测试）
       this.postCategory()
     },
