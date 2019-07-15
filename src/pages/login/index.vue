@@ -7,17 +7,16 @@
       <div class='content'>
         <div class='title_sq'>申请获取以下权限</div>
         <p>获得你的公开信息(昵称，头像等)</p></div>
-      <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" @click="getUserInfoClick" class="bottom">获取权限
+      <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" @click="" class="bottom">获取权限
       </button>
     </div>
     <div v-else>请升级微信版本</div>
-
   </div>
 </template>
 
 <script>
+  // 引入封装的函数 缓存的读取
   import local from '@/utils/local'
-
   export default {
     data () {
       return {
@@ -50,7 +49,7 @@
               // 查看是否授权过
               let grant = res.authSetting['scope.userInfo']
               if (grant) {
-                // 如果已经授权过，则直接跳转到首页
+                // 如果已经授权过，则直接跳转到首页（这里应该添加一些参数）
                 let url = '../index/main'
                 wx.navigateTo({url})
               }
